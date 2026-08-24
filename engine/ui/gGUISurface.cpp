@@ -51,6 +51,9 @@ void gGUISurface::drawContent() {
 }
 
 void gGUISurface::drawShapes() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	for(int i = 0; i < shapes.size(); i++) {
 		//rectangle = 0
 		if((int)shapes[i][0] == SHAPE_RECTANGLE) {//for drawing RECTANGLE first index decides to the shape type
@@ -85,7 +88,7 @@ void gGUISurface::drawShapes() {
 		//text = 6
 		else if((int)shapes[i][0] == SHAPE_TEXT) {//for drawing TEXT first index decides to the shape type
 			renderer->setColor(gColor(shapes[i][6], shapes[i][7], shapes[i][8], shapes[i][9]));
-			root->getAppManager()->getGUIManager()->getFont(shapes[i][3], shapes[i][4])->drawText(texts[shapes[i][5]], shapes[i][1], shapes[i][2]);
+			root->getAppManager()->getGUIManager()->getFont(shapes[i][3], shapes[i][4])->drawText(texts[shapes[i][5]], shapes[i][1], shapes[i][2] - verticalscroll);
 		}
 		//gGUISizer = 7
 		else if((int)shapes[i][0] == SHAPE_GUISIZER) {//for drawing GGUICONTROLS first index decides to the shape type
